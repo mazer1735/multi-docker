@@ -1,0 +1,34 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "mazer1735/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "mazer1735/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "mazer1735/multi-worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "mazer1735/multi-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "host": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
